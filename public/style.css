@@ -1,0 +1,208 @@
+/* 핸드폰 화면용 */
+@media only screen and (max-width: 992px) {
+  #pills-tab {
+      margin-left: -2%;
+      margin-right: -2%;
+  }
+
+  .black-stitch, .white-stitch{
+    width: 1vw !important;
+  }
+
+  #login-box {
+      width: 90vw;
+  }
+  #common body {
+      overflow-x: hidden;
+  }
+  .calendars, .flatpickr-calendar {
+      width: auto !important;
+  }
+  .p .nav-link {
+      padding: 0.5rem;
+  }
+  .navbar-nav {
+      font-size: 0.8rem;
+      flex-direction: row;
+  }
+  .nav-item {
+      padding-right: 0.5rem;
+  }
+
+  .mobile-text-s {
+      font-size: 0.7rem;
+  }
+  .p {
+      padding-right: 0;
+  }
+  .nav-pills .nav-link {
+      padding-left: 0;
+      padding-right: 0;
+  }
+  #mynav {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+  }
+  .logo {
+      height: 2rem;
+  }
+  .navbar-brand {
+      margin-right: 0;
+  }
+  .tab-pane.fade>img {
+      width: 90vw !important;
+  }
+}
+
+
+.btn-check:active+.btn-outline-dark, .btn-check:checked+.btn-outline-dark, .btn-outline-dark.active, .btn-outline-dark.dropdown-toggle.show, .btn-outline-dark:active {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.mobile-w {
+  width: 50vw;
+}
+
+/* Color Set*/
+
+
+
+:root {
+  --main-color:#1b1c1d;
+  --sub-color: yellow;
+  --text-color: pink;
+}
+
+
+
+
+.ui.menu .item img.logo {
+  margin-right: 1.5em;
+}
+
+.main.container {
+  margin-top: 7em;
+}
+
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 5em 0em;
+}
+
+.calendars {
+  width: 22rem;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+  }
+}
+.white-stitch{
+  /* border:1px dashed white !important; */
+  width:2vw;
+  height:3rem;
+
+
+}
+
+.black-stitch{
+  border:1px dashed black !important; 
+  outline: 0.3em solid white !important;
+
+
+}
+.ui.basic.button, .ui.basic.buttons .button{
+  width:2vw !important;
+  height:3rem !important;
+}
+
+.ui.inverted.button{
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0.3em dashed white !important;
+  width:2vw !important;
+  height:3rem !important;
+}
+
+.black-stitch:focus, .black-stitch:hover{
+  background-color:black !important;
+  color:white !important;
+}
+
+.ui.grey.button:active, .ui.secondary.button:active, .ui.secondary.buttons .button:active{
+  background-color:magenta !important;
+}
+
+.tab-pane.fade>img {
+  width: 30vw;
+}
+
+
+
+
+.ui.accordion .title:not(.ui),.ui.card>.content>.header, .ui.cards>.card>.content>.header,html,h1, h2, h3, h4, h5, h6, .ui.menu, .ui.header, body, a.nav-link {
+  font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+a:hover, a:focus{
+  /* color: white !important; */
+color: grey !important;
+}
+
+.image>img{
+  width:100%;
+}
+
+
+
+.nav-scroller {
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.text-center a {
+  color: black;
+}
+
+.text-center a:hover, a:hover {
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: var(--text-color);
+}
+
+a.nav-link:hover {
+  text-decoration: underline;
+  color: rgba(var(--text-color), 0.5);
+  text-decoration-color: rgba(var(--text-color), 0.5);
+}
+
+.dropdown-menu[style] {
+  left: auto!important;
+}
+
+.full-height {
+  height: 100%;
+}
+
+#myfooter, #mynav, .ui.basic.active.button, .ui.basic.buttons .active.button, .list-group-item.active {
+  background-color: var(--main-color) !important;
+  color: white !important;
+}
+
+
+
+
+
+

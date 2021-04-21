@@ -1,26 +1,14 @@
-This example demonstrates how to use [Express](http://expressjs.com/) 4.x and
-[Passport](http://passportjs.org/) to authenticate users using a username and
-password with [form-based authentication](https://en.wikipedia.org/wiki/HTTP%2BHTML_form-based_authentication).
-Use this example as a starting point for your own web applications.
+# AppTest - Une application CRUD avec Express et SQlite en 10 étapes
 
-## Instructions
+Ce dépôt correspond à l'application développée lors de la rédaction du tutoriel
+[Application CRUD avec Express et SQlite en 10 étapes](https://blog.pagesd.info/2019/09/11/crud-avec-express-sqlite-10-etapes/).
 
-To install this example on your computer, clone the repository and install
-dependencies.
+Le but de ce projet ultra simple est de développer une application Node JS pour apprendre comment :
 
-```bash
-$ git clone https://github.com/passport/express-4.x-local-example.git
-$ cd express-4.x-local-example
-$ npm install
-```
+* Créer réellement un site web très-très basique avec Express.
+* Gérer la mise à jour d’une base de données SQL (SQlite en l'occurence).
 
-Start the server.
-
-```bash
-$ node server.js
-```
-
-Open a web browser and navigate to [http://localhost:3000/](http://127.0.0.1:3000/)
-to see the example in action.  Log in using username `jack` and password `secret`.
-
-
+On trouve assez facilement des exemples avec des bases de données MongoDB et je
+cherchais quelque chose d'assez récent et pour une base de données SQL. Surtout,
+j'aurais aimé avoir un exemple très simple qui ne me perde pas en route en
+m'expliquant WebPack, TypeScript, React, Docker...
