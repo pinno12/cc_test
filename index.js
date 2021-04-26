@@ -12,7 +12,11 @@ const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const crypto = require('crypto');
 const app = express();
+  
+require('dotenv').config()
 
+// ES6 Module loader
+require = require('esm')(module)
 const nunjucks = require('nunjucks');
 nunjucks.configure('views', {
   autoescape: true,
