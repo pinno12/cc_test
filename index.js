@@ -200,17 +200,16 @@ else{
   })
 }))
 .catch(error => {
-  let errorMsg = (error&& error.message ) || ''
-  if (!error && req.query.required) errorMsg = '다시 로그인해주세요'
+			let errorMsg = (error && error.message) || ''
+			if (!error && req.query.required) errorMsg = 'Authentication required'
 
-  res.render('login', {
-    csrfToken: req.csrfToken(),
-    hasError: (errorMsg && errorMsg.length > 0), 
-    error, errorMsg,
-    form: req.body
-  })
-
-  })
+			res.render('login', {
+				csrfToken: req.csrfToken(),
+				hasError: (errorMsg && errorMsg.length > 0),
+				error: errorMsg,
+				form: req.body,
+			})
+		})
 })
 
 app.all('/register', (req,res) => {
