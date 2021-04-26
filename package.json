@@ -13,6 +13,10 @@
   "dependencies": {
     "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "express-nunjucks": "^2.2.5",
+    "mysql": "^2.18.1",
+    "node-mysql": "^0.4.2",
+    "nunjucks": "^3.2.3",
     "sqlite3": "^4.1.0"
   }
 }
