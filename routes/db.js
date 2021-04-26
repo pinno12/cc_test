@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs')
 
 const DATABASE_URL = process.env.DATABASE_URL
 
-const sequelize = new Sequelize(DATABASE_URL, {
-	dialect: 'mysql',
-	// logging: false,
+const sequelize = new Sequelize({
+	dialect: 'sqlite',
+	storage: 'data/apptest.db'
 })
 
 const globalModelConfig = {

@@ -22,12 +22,12 @@ app.use(express.static("public"));
 
 //connection to db
 const db_name = path.join(__dirname, "data", "apptest.db");
-const db = new sqlite3.Database(db_name, err => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log("Connexion réussie à la base de données 'apptest.db'");
-});
+// const db = new sqlite3.Database(db_name, err => {
+//   if (err) {
+//     return console.error(err.message);
+//   }
+//   console.log("Connexion réussie à la base de données 'apptest.db'");
+// });
 
 app.use(session({
   secret: 'awesome chinchin',
@@ -89,7 +89,7 @@ const sql_create = `CREATE TABLE IF NOT EXISTS Livres (
   Commentaires TEXT
 );`;
 
-const sql_
+
 db.run(sql_create, err => {
   if (err) {
     return console.error(err.message);
