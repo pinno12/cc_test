@@ -55,7 +55,7 @@ const Friend = sequelize.define('Friend', {
 	},
 	userId: Sequelize.INTEGER,
 	phone: Sequelize.STRING(15),
-	name: Sequelize.String(30)
+	name: Sequelize.STRING(30)
 })
 
 Friend.belongsTo(UserModel);

@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "connect-session-sequelize": "^7.1.1",
     "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
     "ejs": "^2.7.1",
@@ -24,6 +26,7 @@
     "nunjucks": "^3.2.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "sequelize": "^6.6.2",
     "sqlite3": "^4.1.0"
   }
 }
