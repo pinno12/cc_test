@@ -216,7 +216,7 @@ app.all('/register', (req,res) => {
   new Promise(async (resolve, reject) => {
     if (Object.keys(req.body)>0){
       if (
-        !(req.body.email && req.body.email.length > 3)
+        !(req.body.phone && req.body.phone.length > 3)
       || !(req.body.password && req.body.password.length> 4)
       ){
         reject('입력한 것을 다시 확인해 주세요')

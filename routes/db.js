@@ -52,8 +52,7 @@ const Friend = sequelize.define('Friend', {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
 		autoIncrement: true
-	},
-	userId: Sequelize.INTEGER,
+	},	
 	phone: Sequelize.STRING(15),
 	name: Sequelize.STRING(30)
 })
@@ -64,9 +63,7 @@ const getUserById = id => UserModel.findOne({ where: { id } })
 const getUserByUserphone = username => UserModel.findOne({ where: { username } })
 const getUserByPhone = phone => UserModel.findOne({ where: { phone } })
 
-// const isUsernameInUse = async username => {
-// 	return await getUserByUserphone(username) !== null
-// }
+
 
 const isphoneInUse = async phone => {
 	return (await getUserByPhone(phone) ? true : false)
