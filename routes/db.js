@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs')
 
 const DATABASE_URL = process.env.DATABASE_URL
 
-const sequelize = new Sequelize({
-	dialect: 'sqlite',
-	storage: 'data/apptest.db'
+const sequelize = new Sequelize(DATABASE_URL, {
+	dialect: 'mysql',
+	// logging: false,
 })
 
 const globalModelConfig = {
@@ -52,9 +52,10 @@ const Friend = sequelize.define('Friend', {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
 		autoIncrement: true
-	},	
+	},
+	userId: Sequelize.INTEGER,
 	phone: Sequelize.STRING(15),
-	name: Sequelize.STRING(30)
+	name: Sequelize.String(30)
 })
 
 Friend.belongsTo(UserModel);
@@ -63,7 +64,9 @@ const getUserById = id => UserModel.findOne({ where: { id } })
 const getUserByUserphone = username => UserModel.findOne({ where: { username } })
 const getUserByPhone = phone => UserModel.findOne({ where: { phone } })
 
-
+// const isUsernameInUse = async username => {
+// 	return await getUserByUserphone(username) !== null
+// }
 
 const isphoneInUse = async phone => {
 	return (await getUserByPhone(phone) ? true : false)

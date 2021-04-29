@@ -4,9 +4,11 @@
       margin-left: -2%;
       margin-right: -2%;
   }
+
   .black-stitch, .white-stitch{
     width: 1vw !important;
   }
+
   #login-box {
       width: 90vw;
   }
