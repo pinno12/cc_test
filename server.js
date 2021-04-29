@@ -35,30 +35,36 @@ const db_name = path.join(__dirname, "data", "apptest.db");
 // });
 
 app.use(session({
-  secret: 'awesome chinchin',
-  store: db.SessionStore,
-  resave: false,
-  saveUninitialized: true
+	secret: 'awesome auth',
+	store: db.SessionStore,
+	resave: false,
+	saveUninitialized: true
 }))
 
-//Security
-app.use(passport.initialize())
-app.use(passport.session())
-const passportConfig = { failureRedirectg: '/login'}
-
-const authRequired = (req,res,next) => {
-  if(req.user) return next()
-  else res.redirect('login?required=1')
-}
-
-app.use((req,res,next)=> {
-  res.locals.user = req.user
-  res.locals.isLoggedIn = (req.user && req.user.uid > 0)
-  next()
+// security
+const csrf = csurf({ cookie: true })
+app.use(helmet())
+app.use(csrf)
+app.use((err, req, res, next) => {
+	if (err.code !== 'EBADCSRFTOKEN') return next(err)
+	res.status(403).render('error', { message: 'Invalid form submission!' })
 })
 
-//Username 바꾸기
+// passport
+app.use(passport.initialize())
+app.use(passport.session())
+const passportConfig = { failureRedirect: '/login' }
 
+const authRequired = (req, res, next) => {
+	if (req.user) return next()
+	else res.redirect('/login?required=1')
+}
+
+app.use((req, res, next) => {
+	res.locals.user = req.user
+	res.locals.isLoggedIn = (req.user > 0)
+	next()
+})
 
 passport.serializeUser((user, cb) => {
 	cb(null, user.uid)
@@ -107,8 +113,8 @@ const sql_create = `CREATE TABLE IF NOT EXISTS Livres (
 
 // GET /
 app.get("/", (req, res) => {
-  // res.send("Bonjour le monde...");
-  res.render("register.html");
+  res.send("Bonjour le monde...");
+  // res.render("register.html");
 });
 
 // GET /about
