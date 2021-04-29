@@ -12,7 +12,7 @@ const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const crypto = require('crypto');
 const app = express();
-  
+  app.use(helmet());
 require('dotenv').config()
 
 // ES6 Module loader
@@ -62,53 +62,35 @@ const authRequired = (req, res, next) => {
 
 app.use((req, res, next) => {
 	res.locals.user = req.user
-	res.locals.isLoggedIn = (req.user > 0)
+	res.locals.isLoggedIn = (req.user && req.user.uid > 0)
 	next()
 })
+
+passport.use(new LocalStrategy((username, password, done) => {
+	db.getUserByUsername(username)
+		.then(async (user) => {
+			if (!user) return done(new Error('User not found!'), false)
+			if (!(await db.isPasswordHashVerified(user.password_hash, password))) return done(new Error('Invalid Password'), false)
+			return done(null, user)
+		})
+		.catch((err) => {
+			return done(err)
+		})
+}))
 
 passport.serializeUser((user, cb) => {
 	cb(null, user.uid)
 })
-passport.use(new LocalStrategy((phone,password,done) => {
-  db.getUserByPhone(phone)
-  .then(async (phone) => {
-    if (!phone) return done(new Error('등록되지 않은 번호입니다'), false)
-    if (!(await db.isPasswordHashVerified(phone.password_hash,password))) return done(new Error('Invalid Password'), false)
-    return done(null, phone)
-  })
-  .catch((err) =>{
-    return done(err)
-  })
-}))
-
-//should change
-passport.serializeUser((user,cb) => {
-  cb(null, user.uid)
-})
 
 passport.deserializeUser((uid, cb) => {
-  db.getUserById(uid)
-  .then((user)=>{
-    cb(null,user)
-  })
-  .catch((err) => {
-    cb(err,null)
-  })
+	db.getUserById(uid)
+		.then((user) => {
+			cb(null, user)
+		})
+		.catch((err) => {
+			cb(err, null)
+		})
 })
-
-
-// Création de la table Livres (Livre_ID, Titre, Auteur, Commentaires)
-const sql_create = `CREATE TABLE IF NOT EXISTS Livres (
-  Livre_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-  Titre VARCHAR(100) NOT NULL,
-  Auteur VARCHAR(100) NOT NULL,
-  Commentaires TEXT
-);`;
-
-
-
-
-// Démarrage du serveur
 
 
 // GET /
