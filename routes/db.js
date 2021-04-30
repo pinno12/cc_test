@@ -38,7 +38,7 @@ const SessionModel = sequelize.define('Session', {
 	data: Sequelize.STRING(50000),
 }, globalModelConfig)
 
-const UserModel = sequelize.define('User', {
+const UserModel = sequelize.define('User2', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -53,7 +53,7 @@ sequelize.sync({
 	alter: true
 })
 
-const Friend = sequelize.define('Friend', {
+const Friend = sequelize.define('Friend2', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
