@@ -36,6 +36,23 @@ app.use(session({
 }))
 
 //Security
+const csrf = csurf({ cookie: true })
+app.use(helmet())
+app.use(csrf)
+
+
+app.use((err, req, res, next) => {
+	if (err.code !== 'EBADCSRFTOKEN') return next(err)
+	res.status(403).render('error', { message: 'Invalid form submission!' })
+})
+
+
+app.use((err, req, res, next) => {
+	if (err.code !== 'EBADCSRFTOKEN') return next(err)
+	res.status(403).render('error', { message: 'Invalid form submission!' })
+})
+
+
 app.use(passport.initialize())
 app.use(passport.session())
 const passportConfig = { failureRedirectg: '/login'}
@@ -51,16 +68,9 @@ app.use((req,res,next)=> {
   next()
 })
 
-const csrf = csurf({ cookie: true })
-app.use(helmet())
-app.use(csrf)
-app.use((err, req, res, next) => {
-	if (err.code !== 'EBADCSRFTOKEN') return next(err)
-	res.status(403).render('error', { message: 'Invalid form submission!' })
-})
 
-app.use(csrf());
-app.use(app.router);
+// app.use(csrf());
+// app.use(app.router);
 
 //Username 바꾸기
 passport.use(new LocalStrategy((username,password,done) => {
@@ -176,7 +186,7 @@ app.post("/create", (req, res) => {
 //   });
 // }));
 
-app.all('/login', (req,res,next) => {
+app.all('/login',csrf, (req,res,next) => {
   new Promise((resolve, reject) => {
     if(req.method === 'GET') {return reject()}
     if(req.body.phone && req.body.password){
