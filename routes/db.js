@@ -3,10 +3,16 @@ const bcrypt = require('bcryptjs')
 
 const DATABASE_URL = process.env.DATABASE_URL
 
-const sequelize = new Sequelize(DATABASE_URL, {
-	dialect: 'mysql',
-	// logging: false,
-})
+// const sequelize = new Sequelize({
+// 	dialect: 'mysql',
+// 	// logging: false,
+// })
+
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: 'data/apptest.db'
+});
+
 
 const globalModelConfig = {
 	underscored: true,
@@ -53,9 +59,9 @@ const Friend = sequelize.define('Friend', {
 		primaryKey: true,
 		autoIncrement: true
 	},
-	userId: Sequelize.INTEGER,
+
 	phone: Sequelize.STRING(15),
-	name: Sequelize.String(30)
+	name: Sequelize.STRING(30)
 })
 
 Friend.belongsTo(UserModel);

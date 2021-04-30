@@ -5,8 +5,8 @@ const session = require('express-session')
 const csurf = require('csurf')
 const helmet = require('helmet')
 const passport = require('passport')
-const LocalStrategy = require('passport-local').LocalStrategy
-const db = requrie('./db')(session)
+const LocalStrategy = require('passport-local').Strategy
+const db = require('./routes/db')(session)
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const crypto = require('crypto');
@@ -22,12 +22,7 @@ app.use(express.static("public"));
 
 //connection to db
 const db_name = path.join(__dirname, "data", "apptest.db");
-const db = new sqlite3.Database(db_name, err => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log("Connexion réussie à la base de données 'apptest.db'");
-});
+
 
 app.use(session({
   secret: 'awesome chinchin',
@@ -89,24 +84,7 @@ const sql_create = `CREATE TABLE IF NOT EXISTS Livres (
   Commentaires TEXT
 );`;
 
-const sql_
-db.run(sql_create, err => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log("Création réussie de la table 'Livres'");
-  // Alimentation de la table
-  const sql_insert = `INSERT INTO Livres (Livre_ID, Titre, Auteur, Commentaires) VALUES
-  (1, 'Mrs. Bridge', 'Evan S. Connell', 'Premier de la série'),
-  (2, 'Mr. Bridge', 'Evan S. Connell', 'Second de la série'),
-  (3, 'L''ingénue libertine', 'Colette', 'Minne + Les égarements de Minne');`;
-  db.run(sql_insert, err => {
-    if (err) {
-      return console.error(err.message);
-    }
-    console.log("Alimentation réussie de la table 'Livres'");
-  });
-});
+
 
 // Démarrage du serveur
 app.listen(3000, () => {
@@ -278,7 +256,7 @@ app.all('/register', (req,res) => {
   })
 })
 
-get('/logout', authRequired, (req,res)=>{
+app.get('/logout', authRequired, (req,res)=>{
   req.logout()
   res.render('/')
 })
