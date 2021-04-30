@@ -112,7 +112,7 @@ const sql_create = `CREATE TABLE IF NOT EXISTS Livres (
 
 
 // Démarrage du serveur
-app.listen(3000, () => {
+app.listen(6000, () => {
     console.log("Serveur démarré (http://localhost:3000/ ) !");
 });
 
