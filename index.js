@@ -25,44 +25,36 @@ nunjucks.configure('views', {
 app.set('view engine', 'html');
 app.use(express.static("public"));
 
-//connection to db
-const db_name = path.join(__dirname, "data", "apptest.db");
-// const db = new sqlite3.Database(db_name, err => {
-//   if (err) {
-//     return console.error(err.message);
-//   }
-//   console.log("Connexion réussie à la base de données 'apptest.db'");
-// });
-
 app.use(session({
-  secret: 'awesome chinchin',
-  store: db.SessionStore,
-  resave: false,
-  saveUninitialized: true
+	secret: 'awesome auth',
+	store: db.SessionStore,
+	resave: false,
+	saveUninitialized: true
 }))
+
 
 //Security
 app.use(passport.initialize())
 app.use(passport.session())
-const passportConfig = { failureRedirectg: '/login'}
+const passportConfig = { failureRedirect: '/login'}
 
-const authRequired = (req,res,next) => {
-  if(req.user) return next()
-  else res.redirect('login?required=1')
+const authRequired = (req, res, next) => {
+	if (req.user) return next()
+	else res.redirect('/login?required=1')
 }
 
-app.use((req,res,next)=> {
-  res.locals.user = req.user
-  res.locals.isLoggedIn = (req.user && req.user.uid > 0)
-  next()
+app.use((req, res, next) => {
+	res.locals.user = req.user
+	res.locals.isLoggedIn = (req.user && req.user.phone > 0)
+	next()
 })
 
-//Username 바꾸기
 
 
 passport.serializeUser((user, cb) => {
-	cb(null, user.uid)
+	cb(null, user.id)
 })
+
 passport.use(new LocalStrategy((phone,password,done) => {
   db.getUserByPhone(phone)
   .then(async (phone) => {
@@ -77,11 +69,11 @@ passport.use(new LocalStrategy((phone,password,done) => {
 
 //should change
 passport.serializeUser((user,cb) => {
-  cb(null, user.uid)
+  cb(null, user.id)
 })
 
-passport.deserializeUser((uid, cb) => {
-  db.getUserById(uid)
+passport.deserializeUser((id, cb) => {
+  db.getUserById(id)
   .then((user)=>{
     cb(null,user)
   })
@@ -103,8 +95,8 @@ const sql_create = `CREATE TABLE IF NOT EXISTS Livres (
 
 
 // Démarrage du serveur
-app.listen(3000, () => {
-    console.log("Serveur démarré (http://localhost:3000/ ) !");
+app.listen(3030, () => {
+    console.log("Serveur démarré (http://localhost:3030/ ) !");
 });
 
 // GET /
@@ -122,60 +114,7 @@ app.get("/subscribe", (req, res) => {
   res.render("subscribe");
 });
 
-// GET /data
-app.get("/data", (req, res) => {
-  const test = {
-    titre: "Test",
-    items: ["un", "deux", "trois"]
-  };
-  res.render("data", { model: test });
-});
 
-// GET /livres
-app.get("/livres", (req, res) => {
-  const sql = "SELECT * FROM Livres ORDER BY Titre";
-  db.all(sql, [], (err, rows) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    res.render("livres", { model: rows });
-  });
-});
-
-// GET /create
-app.get("/create", authRequired, (req, res) => {
-  res.render("create", { model: {} });
-});
-
-// POST /create
-app.post("/create", (req, res) => {
-  const sql = "INSERT INTO Livres (Titre, Auteur, Commentaires) VALUES (?, ?, ?)";
-  const book = [req.body.Titre, req.body.Auteur, req.body.Commentaires];
-  db.run(sql, book, err => {
-    if (err) {
-      return console.error(err.message);
-    }
-    res.redirect("/livres");
-  });
-});
-
-// function hashPassword(password, salt) {
-//   var hash = crypto.createHash('sha256');
-//   hash.update(password);
-//   hash.update(salt);
-//   return hash.digest('hex');
-// }
-
-// passport.use(new LocalStrategy(function(username, password, done) {
-//   db.get('SELECT salt FROM users WHERE username = ?', username, function(err, row) {
-//     if (!row) return done(null, false);
-//     var hash = hashPassword(password, row.salt);
-//     db.get('SELECT username, id FROM users WHERE username = ? AND password = ?', username, hash, function(err, row) {
-//       if (!row) return done(null, false);
-//       return done(null, row);
-//     });
-//   });
-// }));
 
 app.all('/login', (req,res,next) => {
   new Promise((resolve, reject) => {

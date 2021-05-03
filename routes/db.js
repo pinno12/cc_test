@@ -6,7 +6,8 @@ const DATABASE_URL = process.env.DATABASE_URL
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'data/apptest.db'
+  storage: 'data/apptest.db',  
+  logging: false
 });
 
 
@@ -64,7 +65,7 @@ Friend.belongsTo(UserModel);
 
 
 const getUserByPhone = phone => UserModel.findOne({ where: { phone } })
-
+const getUserById = id => UserModel.findOne({ where: { id } })
 
 const isphoneInUse = async phone => {
 	return (await getUserByPhone(phone) ? true : false)
