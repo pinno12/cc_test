@@ -3,10 +3,12 @@ const bcrypt = require('bcryptjs')
 
 const DATABASE_URL = process.env.DATABASE_URL
 
-const sequelize = new Sequelize(DATABASE_URL, {
-	dialect: 'mysql',
-	// logging: false,
-})
+
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: 'data/apptest.db'
+});
+
 
 const globalModelConfig = {
 	underscored: true,
@@ -32,7 +34,7 @@ const SessionModel = sequelize.define('Session', {
 	data: Sequelize.STRING(50000),
 }, globalModelConfig)
 
-const UserModel = sequelize.define('User', {
+const UserModel = sequelize.define('User2', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -47,26 +49,22 @@ sequelize.sync({
 	alter: true
 })
 
-const Friend = sequelize.define('Friend', {
+const Friend = sequelize.define('Friend2', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
 		autoIncrement: true
 	},
-	userId: Sequelize.INTEGER,
+
 	phone: Sequelize.STRING(15),
-	name: Sequelize.String(30)
+	name: Sequelize.STRING(30)
 })
 
 Friend.belongsTo(UserModel);
 
-const getUserById = id => UserModel.findOne({ where: { id } })
-const getUserByUserphone = username => UserModel.findOne({ where: { username } })
+
 const getUserByPhone = phone => UserModel.findOne({ where: { phone } })
 
-// const isUsernameInUse = async username => {
-// 	return await getUserByUserphone(username) !== null
-// }
 
 const isphoneInUse = async phone => {
 	return (await getUserByPhone(phone) ? true : false)
@@ -117,8 +115,7 @@ module.exports = (session) => {
 	})
 
 	return {
-		SessionStore,
-		getUserById,		
+		SessionStore,			
 		getUserByPhone,		
 		isphoneInUse,
 		createUserRecord,
