@@ -1,0 +1,25 @@
+{% include "_header.html" %}
+    
+      <main role="main" class="flex-shrink-0 mt-4 py-5 container">
+    
+        <h1>Register</h1>
+        <form method="post">
+ 
+          {% if hasError %}
+            <div class="error">{{error}}</div>
+          {% endif %}
+        
+          <label for=phone>Username</label>
+          <input id="phone" type="text" name="phone"  />
+        
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" value="{{form.username}}" />
+          
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" />
+          
+          <button type="submit">Register</button>
+        </form>
+  </main>
+
+{% include "_footer.html" %}
