@@ -10,30 +10,36 @@
       </p>
     </div>
     <div class="col-10 mx-auto col-lg-5">
-      <form class="p-5 border rounded-3 bg-light">
+      <form method = "post" class="p-5 border rounded-3 bg-light">
+
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+        {% if hasError %}
+        <div class="error">{{error}}</div>
+      {% endif %}
+
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">핸드폰 아이디</label>
+          <input type="text" class="form-control" id="phone" placeholder="name@example.com" name="phone" value="{{form.phone}}" >
+          <label for="phone">핸드폰번호</label>
         </div>
+
+        <label for="username">phone</label>
+        <input id="username" type="text" name="username" value="{{form.phone}}" />
+        
+
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">숫자 비밀번호</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+          <label for="password">숫자 비밀번호</label>
         </div>
+
+        <label for="password2">Re-type Password</label>
+        <input id="password2" type="password" name="password2" />
+      
 
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">친구 핸드폰 번호</label>
           </div>
-        <!-- <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> 나를 기억해 주세요
-          </label>
-        </div> -->
-
-        <!-- <div class="ui slider checkbox">
-            <input type="checkbox" name="newsletter">
-            <label>친구의 친구에게 바로 연락처를 공개합니다.</label>
-          </div> -->
+  
 
 
         <button class="w-100 btn btn-lg btn-dark" type="submit">회원 가입</button>

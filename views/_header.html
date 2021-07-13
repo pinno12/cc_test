@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="꼼즈 다이마루 토탈 봉제 공장, 옷, 생산 관리,
+  <meta name="description" content="소개팅, 친구의 친구, 연애, 첫만남, 설렘
 ">
   <meta property="og:url" content="comz.glitch.me">
   <meta name="author" content="자뷰">
   <meta name="generator" content="Jekyll v4.1.1">
-  <meta property="og:title" content="꼼즈">
-  <meta property="og:description" content="다이마루 토탈 봉제 공장">
-  <meta property="og:image" content="/images/brands/8.png">
+  <meta property="og:title" content="친친">
+  <meta property="og:description" content="친구의 친구를 만나다">
+  <meta property="og:image" content="images/1.png">
   <title>친친 | 믿음이 가는 친구의 친구를 만나다 </title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Jua&amp;display=swap" rel="stylesheet">
@@ -43,49 +43,86 @@
   <link rel="stylesheet" href="./style.css">
   <script src="nunjucks.js"></script>
   <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-65945715-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-65945715-5');
+</script>
+
 </head>
 
 <body class="d-flex flex-column h-100" data-aos-easing="ease" data-aos-duration="400"
   data-aos-delay="0">
 
 
-  <header class="px-3 py-2 bg-info text-white">
+  <header class="px-3 py-2 bg-info text-white sticky-top">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
           <div class="ui basic button bg-white black-stitch fw-bold">친</div>   
           <div class="ui inverted button white-stitch mt-3  ">친</div> 
         </a>
-  
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+
           <li>
-            <a href="/create" class="nav-link text-white">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
-              <i class="user plus icon"></i>   소개합니다
+            <a href="/" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
+              <i class="users icon"></i>친구들 이어주기
             </a>
           </li>
+
+          {% if user_phone %}
           <li>
-            <a href="/about" class="nav-link text-white">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
-              <i class="users icon"></i>     큐피드가 됩니다
+            <a href="/solo" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#home"></use></svg>
+              <i class="user plus icon"></i> 내 친구를 소개합니다
             </a>
           </li>
+       {% else %}
           <li>
+            <a href="/register" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
+              <i class="users icon"></i>가입합니다 
+            </a>
+          </li>
+          {% endif %}
+          <!-- <li>
             <a href="#" class="nav-link text-white">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#table"></use></svg>
       만날래요
             </a>
-          </li>
+          </li> -->
           <li>
             <a href="/subscribe" class="nav-link text-white">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
-              <i class="smile wink outline icon"></i>     구독합니다
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#grid"></use></svg>
+              <i class="smile wink outline icon"></i>구독합니다
             </a>
           </li>
+
           <li>
-            <a href="#" class="nav-link text-white">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-              <i class="users icon"></i>      내 칭구들
+            {% if user_phone %}
+            <a href="/logout" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#grid"></use></svg>
+              <i class="smile wink outline icon"></i>{{ user_phone }}로그아웃
+            </a>
+            {% else %}
+            <a href="/login" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#grid"></use></svg>
+              <i class="smile wink outline icon"></i>로그인
+            </a>
+            {% endif %}
+          </li>
+    
+
+          <li>
+            <a href="/myfriends" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1 d-none d-sm-block" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+              <i class="users icon"></i>내 칭구들
             </a>
           </li>
         </ul>

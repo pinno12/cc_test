@@ -9,15 +9,24 @@ rc.circle(40, 70,80,  {
   stroke: 'white'
 });
 rc.circle(120, 90, 80,  {
-  fill: 'white',
-  hachureAngle: 60, hachureGap: 5
+  fill: '#96E6F5',
+  hachureAngle: 60, hachureGap: 5,
+  stroke: '#96E6F5'
 });
 
 // ellipse and circle
+$('.ui.sticky')
+  .sticky({
+    context: '#content'
+  })
+;
 
-
-
-
+$('.ui.sidebar')
+  .sidebar('setting', 'transition', 'overlay')
+  // .sidebar('toggle')
+  .sidebar('attach events', '.open.button', 'show')
+  .sidebar('setting','dimPage', false )
+;
 
 $('.ui.modal')
 .modal('show')

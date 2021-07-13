@@ -1,0 +1,70 @@
+{% include "_header.html" %}
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">내 친구를 소개합니다</h1>
+      <p class="col-lg-10 fs-4">
+        이 친구 솔로에요. 어떤 친구냐면요
+   
+      </p>
+    </div>
+    <div class="col-10 mx-auto col-lg-5">
+    
+     
+
+
+<form method="POST"  class="p-5 border rounded-3 bg-light">
+
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
+    <label class="form-check-label" for="inlineRadio1">남</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="W">
+    <label class="form-check-label" for="inlineRadio2">여</label>
+  </div>
+  
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name = "pros">
+    <label for="floatingInput">좋은점</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingPassword" placeholder="Password" name = "cons">
+    <label for="floatingPassword">아쉬운점</label>
+  </div> 
+  
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name = "muze">
+    <label for="floatingInput">이상형</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="number" id = "age" class="form-control" name = "age" value = "30">
+    <label for="age">나이</label>
+  </div>
+  <div class="form-floating mb-3">
+    <!-- <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name = "etc" style="height: 100px"></textarea> -->
+    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name = "etc">
+    
+    <label for="floatingTextarea2">사는 곳/직장/이상형/기타</label>
+  </div>
+  
+  <div class="ui toggle checkbox mb-3 checked">
+    <input type="checkbox"  name = "is_solo" value = "1">
+    <label>소개를 받을 수 있어요</label>
+  </div>
+
+ 
+    <button class="w-100 btn btn-lg btn-dark-blue" type="submit">소개합니다</button>
+    <hr class="my-4">
+
+
+  <small class="text-muted">친구에게 공유하여 바로 연락을 받을 수 있게 하세요</small>
+</form>
+
+</div>
+</div>
+</div>
+
+
+{% include "_footer.html" %}

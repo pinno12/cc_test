@@ -1,25 +1,49 @@
 {% include "_header.html" %}
-    
-      <main role="main" class="flex-shrink-0 mt-4 py-5 container">
-    
-        <h1>Register</h1>
-        <form method="post">
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">친구는 끼리끼리 논다잖아요.</h1>
+      <p class="col-lg-10 fs-4">
+        친구의 친구는 나와 더 잘 맞지 않을까요? <br />친구의 친구를 만나다. <br /> 친친
+
+      </p>
+    </div>
+    <div class="col-10 mx-auto col-lg-5">
+      <form method="post" class="p-5 border rounded-3 bg-light">
+
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+        {% if hasError %}
+        <div class="error">{{error}}</div>
+        {% endif %}
+<!-- 
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="phone" placeholder="name@example.com" name="phone"
+            value="{{form.phone}}">
+          <label for="phone">핸드폰번호</label>
+        </div> -->
+
+        <label for="exampleInputEmail1" class="form-label">핸드폰 번호</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value = "010"
+          name="phone">
+        <div id="emailHelp" class="form-text">-없이 010부터 입력해주세요</div>
+
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="username" placeholder="야" name="username" value = "{{form.name}}">
+          <label for="username">이름</label>
+        </div>
  
-          {% if hasError %}
-            <div class="error">{{error}}</div>
-          {% endif %}
-        
-          <label for=phone>Username</label>
-          <input id="phone" type="text" name="phone"  />
-        
-          <label for="username">Username</label>
-          <input id="username" type="text" name="username" value="{{form.username}}" />
-          
-          <label for="password">Password</label>
-          <input id="password" type="password" name="password" />
-          
-          <button type="submit">Register</button>
-        </form>
-  </main>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+          <label for="password">숫자 비밀번호</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-dark" type="submit">회원 가입</button>
+        <hr class="my-4">
+        <small class="text-muted">회원 가입 버튼을 눌렀을 때 개인 정보 처리 방침에 동의하는 것으로 간주합니다.</small>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% include "_footer.html" %}

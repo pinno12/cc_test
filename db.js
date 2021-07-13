@@ -3,18 +3,17 @@ const bcrypt = require('bcryptjs')
 
 const DATABASE_URL = process.env.DATABASE_URL
 
-
 const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'data/apptest.db',  
-  logging: false
-});
-
+	dialect: 'sqlite',
+	storage: 'data/apptest.db',
+	logging: false
+  });
 
 const globalModelConfig = {
 	underscored: true,
 	timestamps: true,
 }
+
 sequelize.authenticate()
 	.then(() => {
 		// eslint-disable-next-line no-console
@@ -32,77 +31,81 @@ const SessionModel = sequelize.define('Session', {
 	},
 	expires: Sequelize.DATE,
 	data: Sequelize.STRING(50000),
-},
-)
+}, globalModelConfig)
 
-const UserModel = sequelize.define('Users', {
+const UserModel = sequelize.define('User', {
+	uid: {
+		type: Sequelize.INTEGER,
+		primaryKey: true,
+		autoIncrement: true,
+	},
+	name: Sequelize.TEXT,
+	phone: Sequelize.TEXT,
+	password_hash: Sequelize.STRING(255),
+}, globalModelConfig)
+
+const SoloModel = sequelize.define('Solo', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	username: Sequelize.STRING(30),
-	phone: Sequelize.STRING(15),
-	pwd: Sequelize.STRING(15),	
-	password_hash: Sequelize.STRING(255),
-}, 
-globalModelConfig
-)
-
-sequelize.sync({
-	alter: true
-})
-
-const Friend = sequelize.define('Friends', {
-	id: {
-		type: Sequelize.INTEGER,
-		primaryKey: true,
-		autoIncrement: true
-	},
-	phone: Sequelize.STRING(15),
-	name: Sequelize.STRING(30)
-}, 
-globalModelConfig
-)
-
-const Solos = sequelize.define('Solos', {
-	id: {
-		type: Sequelize.INTEGER,
-		primaryKey: true,
-		autoIncrement: true
-	},
 	pros: Sequelize.TEXT,
 	cons: Sequelize.TEXT,
+	muze: Sequelize.TEXT,
 	age: Sequelize.INTEGER,
 	etc: Sequelize.TEXT,
-	isSolo: Sequelize.BOOLEAN,
-	genter: Sequelize.ENUM('W', 'M'),
-}, 
-globalModelConfig
-)
+	is_solo: Sequelize.BOOLEAN,
+	gender: Sequelize.ENUM('W','M'),
+	user_phone: Sequelize.TEXT
+}, globalModelConfig)
 
-Solos.belongsTo(UserModel);
-Friend.belongsTo(UserModel);
+// UserModel.hasMany(SoloModel, {
+// 	foreignKey: {
+// 		name: 'user_uid',
+// 		allowNull: false
+// 	}
+// })
+SoloModel.belongsTo(UserModel, {as: 'user', constraints: false})
 
-const getUserByPhone = (phone) => UserModel.findOne({ 
-	where: 
-{ phone: phone }
-	
+const FriendModel = sequelize.define('Friends', {
+	id: {
+		type: Sequelize.INTEGER,
+		primaryKey: true,
+		autoIncrement: true,
+	},
+	friend_phone: Sequelize.TEXT,
+	friend_name: Sequelize.TEXT,
+	user_phone: Sequelize.TEXT
 })
 
-const getUserById = id => UserModel.findOne({ where: { id } })
-// const getUserByPhone = phone => UserModel.findOne({ where: { phone } })
+// FriendModel.sync()
+// FriendModel.sync({ alter: true })
+// UserModel.hasMany(FriendModel, {
+// 	foreignKey: {
+// 		name: 'user_uid',
+// 		allowNull: false
+// 	}
+// })
+
+const getUserById = uid => UserModel.findOne({ where: { uid } })
+const getUserByphone = phone => UserModel.findOne({ where: { phone } })
+
+
+// const isphoneInUse = async phone => {
+// 	return await getUserByphone(phone) !== null
+// }
 
 const isphoneInUse = async phone => {
-	return (await getUserByPhone(phone) ? true : false)
+	return (await getUserByphone(phone) ? true : false)
 }
 
 const createUserRecord = userObj => new Promise(async (resolve, reject) => {
 	const passwdHash = await createPasswordHash(userObj.password)
 	UserModel.create({
 		phone: userObj.phone,
-		username: userObj.username,
 		password_hash: passwdHash,
+		name: userObj.name
 	})
 		.then((createdUser) => {
 			resolve(createdUser)
@@ -133,19 +136,22 @@ const isPasswordHashVerified = (hash, password) => new Promise(async (resolve, r
 	}
 })
 
-
 module.exports = (session) => {
 	const SequelizeStore = require('connect-session-sequelize')(session.Store)
+	
 	const SessionStore = new SequelizeStore({
 		db: sequelize,
 		table: 'Session'
 	})
 
 	return {
-		SessionStore,			
-		getUserByPhone,		
+		SessionStore,
+		getUserById,	
+		getUserByphone,
 		isphoneInUse,
 		createUserRecord,
 		isPasswordHashVerified,
+		SoloModel,
+		FriendModel
 	}
 }

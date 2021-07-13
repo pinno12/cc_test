@@ -1,327 +1,112 @@
 {% include "_header.html" %}
+
+<main role="main" class="flex-shrink-0 mt-4 py-5 container" id = "">
+  <div class="row justify-content-between">
+
+    <div class="col-lg-6 col-11 mb-3" id = "content">
+
+      <h2 class="ui header">
+        👀 
+        <div class="content">
+        친구의 친구들
+        </div>
+      </h2>      
     
-      <main role="main" class="flex-shrink-0 mt-4 py-5 container">
-    
-    <div class="row" >
-      <div class="p-3 bg-white col-md-4 d-md-block bg-light sidebar collapse" style = "position:fixed" >
-        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-          <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-          <span class="fs-5 fw-semibold">Collapsible</span>
-        </a>
-        <ul class="list-unstyled ps-0">
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              Home
-            </button>
-            <div class="collapse show" id="home-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">Overview</a></li>
-                <li><a href="#" class="link-dark rounded">Updates</a></li>
-                <li><a href="#" class="link-dark rounded">Reports</a></li>
-              </ul>
+        <div class="ui three doubling cards">
+          {% for i in solo %}
+          {% if i.user_phone == user_phone  %}
+          {% else %}
+       
+          {% if i.gender == 'W'  %}
+          <a class="teal card" style= "background-color: #96e6f5;">
+            {% else %}
+            <a class="black card">
+              {% endif %}
+            <div class="content">
+              <div class="header">{{i.age }}살
+                <small>
+                              {% if i.gender == 'W'  %}
+                              여자
+                              {% else %}
+                              남자
+                              {% endif %}
+                            </small>
+                            </div>
+              <div class="meta">{{i.pros}}</div>
+              <div class="description">
+                {% if i.cons  %} 
+                <p><small class = "text-mute">아쉬운 점은..</small>{{i.cons}}</p>            
+                {% endif %}
+                {% if i.muze  %} 
+                <p><small class = "text-mute">이상형 </small>{{i.muze}}</p>
+                {% endif  %} 
+                <p>{{i.name }}의 친구</p>
+              </div>
             </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-              Dashboard
-            </button>
-            <div class="collapse" id="dashboard-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">Overview</a></li>
-                <li><a href="#" class="link-dark rounded">Weekly</a></li>
-                <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                <li><a href="#" class="link-dark rounded">Annually</a></li>
-              </ul>
+            <div class="extra content">
+              <i class="check icon"></i>
+              {{i.etc}}
             </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-              Orders
-            </button>
-            <div class="collapse" id="orders-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">New</a></li>
-                <li><a href="#" class="link-dark rounded">Processed</a></li>
-                <li><a href="#" class="link-dark rounded">Shipped</a></li>
-                <li><a href="#" class="link-dark rounded">Returned</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="border-top my-3"></li>
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-              Account
-            </button>
-            <div class="collapse" id="account-collapse" style="">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">New...</a></li>
-                <li><a href="#" class="link-dark rounded">Profile</a></li>
-                <li><a href="#" class="link-dark rounded">Settings</a></li>
-                <li><a href="#" class="link-dark rounded">Sign out</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class = "offset-md-6 col-md-6">
-      <div class="mx-4   ">
-        <div class="card">
-          <table class="table table-dark table-hover">
-            <thead>
-              <tr>
-
-                <th scope="col">ggg</th>
-                <th scope="col">남</th>
-                <th scope="col">37 ㅈㅇㅅ</th>
-                <th scope="col">배려짱</th>
-                <th scope="col">키가 작아요.</th>
-                <th scope="col">서울 동아제약</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td scope="row">여</td>
-
-                <td scope="row">37 언니</td>
-                <td>성격갑</td>
-                <td>ㅎㅎ</td>
-                <td>서울 마곡 엘지화학</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <th scope="row">남</th>
-                <td>32 김ㄱㅅ</td>
-                <td>작고 귀엽고 뽀얀 사람이 이상형</td>
-                <td>훈남/집돌이</td>
-                <td>수원 삼성전기</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td>38</td>
-                <td>남</td>
-                <td scope="row">푸근</td>
-
-                <td>수학과</td>
-                <td>수원에 집있음</td>
-              </tr>
-            </tbody>
-
-          </table>
-        </div>
-      </div>
-
-
-      <div class="mx-4  ">
-        <div class="card">
-          <table class="table table-dark table-hover">
-            <thead>
-              <tr>
-
-                <th scope="col">ggg</th>
-                <th scope="col">남</th>
-                <th scope="col">37 ㅈㅇㅅ</th>
-                <th scope="col">배려짱</th>
-                <th scope="col">키가 작아요.</th>
-                <th scope="col">서울 동아제약</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td scope="row">여</td>
-
-                <td scope="row">37 언니</td>
-                <td>성격갑</td>
-                <td>ㅎㅎ</td>
-                <td>서울 마곡 엘지화학</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td scope="row">여</td>
-
-                <td scope="row">36 언니</td>
-                <td>귀여움</td>
-                <td>ㅎㅎ</td>
-                <td>서울 마곡 엘지화학</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <th scope="row">남</th>
-                <td>32 김ㄱㅅ</td>
-                <td>작고 귀엽고 뽀얀 사람이 이상형</td>
-                <td>훈남/집돌이</td>
-                <td>수원 삼성전기</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td>38</td>
-                <td>남</td>
-                <td scope="row">푸근</td>
-
-                <td>수학과</td>
-                <td>수원에 집있음</td>
-              </tr>
-            </tbody>
-
-          </table>
-
-        </div>
-      </div>
-
-      <div class="mx-4  ">
-        <div class="card">
-          <table class="table table-dark table-hover">
-            <thead>
-              <tr>
-
-                <th scope="col">ggg</th>
-                <th scope="col">남</th>
-                <th scope="col">37 ㅈㅇㅅ</th>
-                <th scope="col">배려짱</th>
-                <th scope="col">키가 작아요.</th>
-                <th scope="col">서울 동아제약</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td scope="row">여</td>
-
-                <td scope="row">37 언니</td>
-                <td>성격갑</td>
-                <td>ㅎㅎ</td>
-                <td>서울 마곡 엘지화학</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td scope="row">여</td>
-
-                <td scope="row">36 언니</td>
-                <td>귀여움</td>
-                <td>ㅎㅎ</td>
-                <td>서울 마곡 엘지화학</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <th scope="row">남</th>
-                <td>32 김ㄱㅅ</td>
-                <td>작고 귀엽고 뽀얀 사람이 이상형</td>
-                <td>훈남/집돌이</td>
-                <td>수원 삼성전기</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td>38</td>
-                <td>남</td>
-                <td scope="row">푸근</td>
-
-                <td>수학과</td>
-                <td>수원에 집있음</td>
-              </tr>
-            </tbody>
-
-          </table>
-
-        </div>
-      </div>
-
-      <div class="mx-4  ">
-        <div class="card">
-
-          <table class="table table-dark table-hover">
-            <thead>
-              <tr>
-
-                <th scope="col">ggg</th>
-                <th scope="col">남</th>
-                <th scope="col">37 ㅈㅇㅅ</th>
-                <th scope="col">배려짱</th>
-                <th scope="col">키가 작아요.</th>
-                <th scope="col">서울 동아제약</th>
-              </tr>
-            </thead>
-            <tbody>
-
-
-
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-
-                  </div>
-                </td>
-                <td>38</td>
-                <td>남</td>
-                <td scope="row">푸근</td>
-
-                <td>수학과</td>
-                <td>수원에 집있음</td>
-              </tr>
-            </tbody>
-
-          </table>
-        </div>
-      </div>
-</div>
+          </a>
+          {% endif %}
+          {% endfor %}
+         
+        
     </div>
+  
+  </div>
+  
+    <div class="bg-white d-md-block bg-light col-lg-5 col-11 " >
+      <h2 class="ui header">
+        😘
+        <div class="content">
+          내 친구들
+        </div>
+      </h2>
 
-
-  </main>
-  {% include "_footer.html" %}
+      <div class="ui three doubling cards">
+        {% for i in solo %}
+        {% if i.user_phone == user_phone  %}
+      
+        {% if i.gender == 'W'  %}
+        <a class="teal card" >
+          <!-- style= "background-color: f2fcfe;" -->
+          {% else %}
+         
+          <a class="black card" style= "background-color: #96e6f5;">
+            {% endif %}
+          <div class="content">
+            <div class="header">{{i.age }}살
+<small>
+              {% if i.gender == 'W'  %}
+              여자
+              {% else %}
+              남자
+              {% endif %}
+            </small>
+            </div>
+            <div class="meta">{{i.pros}}</div>
+            <div class="description">
+              {% if i.cons  %} 
+              <p><small class = "text-mute">아쉬운 점은..</small>{{i.cons}}</p>            
+              {% endif %}
+              {% if i.muze  %} 
+              <p><small class = "text-mute">이상형 </small>{{i.muze}}</p>
+              {% endif  %} 
+           
+            </div>
+          </div>
+          <div class="extra content">
+            <i class="check icon"></i>
+            {{i.etc}}
+          </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+  </div>
+  
+    </div>
+ 
+  </div>
+</main>
+{% include "_footer.html" %}

@@ -1,0 +1,70 @@
+{% include "_header.html" %}
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-5 py-5">
+    <div class="col-lg-6 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">내 친구를 등록합니다.</h1>
+      <p class="col-lg-10 fs-4">
+        친구의 친구가 이어지게끔 도와줄래요. 큐피트가 될테야
+      </p>
+    </div>
+    <div class="mx-auto col-lg-6">
+      <form method="POST" class="p-5 border rounded-3 bg-light">
+        <!--  
+  <div class="ui input">
+    <input type="text" placeholder="-없이 입력" name = "friend_phone" >
+  </div> -->
+  <label for="name" class="form-label">이름</label>
+  <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
+    name="friend_name">
+        <label for="exampleInputEmail1" class="form-label">핸드폰 번호</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value = "010"
+          name="friend_phone">
+        <div id="emailHelp" class="form-text">-없이 010부터 입력해주세요</div>
+        <!-- <div class="form-floating mb-3">
+  <input type="text" class="form-control" id="floatingInput" placeholder="핸드폰번호" name = "friend_phone" val="010">
+  <label for="floatingInput">좋은 친구 핸드폰 번호</label>
+
+</div> -->
+
+
+        <button class="w-100 btn btn-lg btn-dark-blue" type="submit">서로의 솔로인 친구를 봅니다 </button>
+        <hr class="my-4">
+
+      </form>
+
+    </div>
+
+
+  </div>
+  <section class = "row">
+    <h3>내 큐피드 칭구들</h3>
+    <div class= "col-lg-4">
+      <div class="ui middle aligned animated list">      
+        {% for i in friends %}
+        {% if i.user_phone == user_phone  %}
+          <div class="item">
+            <i class="hand holding heart icon"></i>
+            <div class="content">
+              <div class="header">{{i.friend_name}} </div>
+              {{i.friend_phone}}
+            </div>
+          </div>     
+          {% else %}
+          <div class="item">
+            <i class="hand holding heart icon"></i>
+            <div class="content">
+              <!-- <div class="header">{{i.friend_name}} </div> -->
+              {{i.user_phone}}
+            </div>
+          </div>
+          {% endif %}    
+            {% endfor %}
+      </div>   
+    </div>
+  </section>
+</div>
+
+
+
+{% include "_footer.html" %}

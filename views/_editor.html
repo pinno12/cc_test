@@ -1,37 +1,38 @@
 
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+  <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
   <label class="form-check-label" for="inlineRadio1">남</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="W">
   <label class="form-check-label" for="inlineRadio2">여</label>
 </div>
 
 <div class="form-floating mb-3">
-  <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+  <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name = "pros">
   <label for="floatingInput">좋은점</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+  <input type="text" class="form-control" id="floatingPassword" placeholder="Password" name = "cons">
   <label for="floatingPassword">아쉬운점</label>
-</div>
+</div> 
 
-<!-- <div class="form-floating mb-3">
-  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">이상형</label>
-</div> -->
 <div class="form-floating mb-3">
-  <input type="number" class="form-control" id="floatingPassword" placeholder="Password">
-  <label for="floatingPassword">나이</label>
+  <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name = "muze">
+  <label for="floatingInput">이상형</label>
 </div>
 <div class="form-floating mb-3">
-  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <input type="number" id = "age" class="form-control" name = "age" value = "30">
+  <label for="age">나이</label>
+</div>
+<div class="form-floating mb-3">
+  <!-- <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name = "etc" style="height: 100px"></textarea> -->
+  <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name = "etc">
+  
   <label for="floatingTextarea2">사는 곳/직장/이상형/기타</label>
 </div>
 
-
-<div class="ui toggle checkbox mb-3">
-  <input type="checkbox" name="public">
+<div class="ui toggle checkbox mb-3 checked">
+  <input type="checkbox"  name = "is_solo" value = "1">
   <label>소개를 받을 수 있어요</label>
 </div>

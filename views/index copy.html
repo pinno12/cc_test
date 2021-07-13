@@ -1,0 +1,82 @@
+{% include "_header.html" %}
+
+<main role="main" class="flex-shrink-0 mt-4 py-5 container" id = "content">
+  <div class="row justify-content-between">
+    <div class="bg-white d-md-block bg-light col-lg-5 col-11 ui sticky" >
+      <h2 class="ui header">
+        😘
+        <div class="content">
+          내 친구들
+        </div>
+      </h2>
+      <table class="table  table-hover border-info">
+        <thead>
+          <tr>
+            <th scope="col">나이</th>
+            <th scope="col">성별</th>
+            <th scope="col">장점</th>
+            <th scope="col">아쉬운 점</th>
+            <th scope="col">사는곳/직장</th>
+            <th scope="col">이상형</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in solo %}         
+          {% if i.user_phone == user_phone  %}    
+          <tr>
+            <td>{{i.age }}</td>
+            <td>{{i.gender}}</td>
+            <td>{{i.pros}}</td>
+            <td>{{i.cons}}</td>
+            <td>{{i.etc }}</td>
+            <td>{{i.muze }}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-6 col-11" id = "friends">
+
+      <h2 class="ui header">
+        👀 
+        <div class="content">
+        친구의 친구들
+        </div>
+      </h2>
+      <div class="table-responsive">
+        <table class="table  table-hover">
+          <thead>
+            <tr>
+              <th scope="col">나이</th>
+              <th scope="col">성별</th>
+              <th scope="col">장점</th>
+              <th scope="col">아쉬운 점</th>
+              <th scope="col">사는곳/직장</th>
+              <th scope="col">이상형</th>
+              <th>친구 번호</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in solo %}
+            {% if i.user_phone == user_phone  %}
+            {% else %}
+            <tr>
+              <td>{{i.age }}</td>
+              <td>{{i.gender}}</td>
+              <td>{{i.pros}}</td>
+              <td>{{i.cons}}</td>
+              <td>{{i.etc }}</td>
+              <td>{{i.muze }}</td>
+              <td>{{i.phone }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>    
+    </div>
+  </div>
+  </div>
+  </div>
+</main>
+{% include "_footer.html" %}

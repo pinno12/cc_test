@@ -1,0 +1,28 @@
+{% include "_header.html" %}
+
+<main class="text-center text-center col-lg-3 col-11 mx-auto my-auto">
+
+<form method="post">
+	<h1 class="h3 mb-3 fw-normal">친구, 로그인해주시게.</h1>
+
+	<input type="hidden" name="_csrf" value="{{csrfToken}}" />
+
+	{%  if hasError %}
+		<div class="error">{{error}}</div>
+	{% endif %}
+
+
+	<div class="form-floating mb-3">
+		<input type="text" class="form-control" id="phone" placeholder="010" name="phone"
+		>
+		<label for="phone">핸드폰번호</label>
+	  </div>
+	  <div class="form-floating mb-3">
+		<input type="password" class="form-control" id="password" placeholder="Password" name="password" >
+		<label for="floatingPassword">비밀 번호</label>
+	  </div>
+	  <button class="w-100 btn btn-lg btn-dark mb-2" type="submit">로그인</button>
+	  <small class= "mt-5"><a href = "/register">가입하기</a></small>
+</form>
+</main>
+{% include "_footer.html" %}
