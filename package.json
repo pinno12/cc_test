@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -e js,html app.js",
+    "start": "node index.js",
     "dev": "nodemon -e js,html app.js"
   },
   "author": "",
@@ -22,7 +22,6 @@
     "express-session": "^1.16.1",
     "helmet": "^3.16.0",
     "mysql2": "^2.0.2",
-    "nodemon": "^2.0.12",
     "nunjucks": "^3.2.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
